@@ -1,58 +1,78 @@
 import 'package:flutter/material.dart';
 
-import 'fittness_video_player/video_player_widget.dart';
-
-class VideoPlayer extends StatefulWidget {
-  const VideoPlayer({Key key}) : super(key: key);
+class AudioPlayerScreen extends StatefulWidget {
+  const AudioPlayerScreen({Key key}) : super(key: key);
 
   @override
-  _VideoPlayerState createState() => _VideoPlayerState();
+  _AudioPlayerScreenState createState() => _AudioPlayerScreenState();
 }
 
-class _VideoPlayerState extends State<VideoPlayer> {
+class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Video Directory'),
-        centerTitle: true,
-        backgroundColor: Color(0xfff6f6f6),
-        elevation: 0,
         leading: Icon(
           Icons.arrow_back_ios_outlined,
           color: Colors.black45,
         ),
+        title: Text('Audio Albums'),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Center(
-                child: Container(
-                  width: size.width - 20,
-                  height: size.height * 0.6,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(40),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.shade300,
-                            offset: Offset(0, 0),
-                            blurRadius: 10,
-                            spreadRadius: 10)
-                      ]),
-                  child: VideoPlayerWidget(
-                    url:
-                        'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-                    timestamps: <Duration>[
-                      Duration(minutes: 0, seconds: 14),
-                    ],
-                  ),
+              Container(
+                padding: EdgeInsets.only(bottom: 25),
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(
+                      offset: Offset(0, 0),
+                      blurRadius: 4,
+                      spreadRadius: 8,
+                      color: Colors.grey.shade200)
+                ]),
+                child: Column(
+                  children: [
+                    Image.asset('assets/images/cover/2.jpg'),
+                    SizedBox(height: 20,),
+                    Text('The Weeked- StarBoy(Offical)'),
+                    Text('ft.Draft Punk'),
+                    SizedBox(height: 5,),
+                    Image.asset(
+                      'assets/images/Path 216.png',
+                      color: Colors.red,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [Text('00.00'), Text('20.00')],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                            child: Image.asset('assets/images/loop.png'),
+                            onTap: null),
+                        buildInkWell(
+                            'assets/images/previous.png', 50, 50, null),
+                        buildInkWell('assets/images/pause.png', 80, 80, null),
+                        buildInkWell('assets/images/forward.png', 50, 50, null),
+                        InkWell(
+                          child: Image.asset('assets/images/loop.png'),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 50,
               ),
               ListView.builder(
                   shrinkWrap: true,
@@ -132,4 +152,25 @@ class _VideoPlayerState extends State<VideoPlayer> {
       ),
     );
   }
+}
+
+InkWell buildInkWell(
+    String image, double width, double height, Function ontap) {
+  return InkWell(
+    onTap: ontap,
+    child: Container(
+        child: Image.asset(image),
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  blurRadius: 0.2,
+                  offset: Offset(0, 0),
+                  spreadRadius: 4)
+            ],
+            borderRadius: BorderRadius.circular(50))),
+  );
 }

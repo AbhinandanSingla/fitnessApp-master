@@ -1,3 +1,4 @@
+import 'package:fitness_app_workout/screens/audioPlayer/audioPlayer.dart';
 import 'package:fitness_app_workout/screens/videoPlayer/videoPlayer.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: VideoPlayer(),
+      home: AudioPlayerScreen(),
     );
   }
 }
